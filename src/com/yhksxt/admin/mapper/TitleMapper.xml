@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhksxt.admin.mapper.TitleMapper" >
+  <resultMap id="BaseResultMap" type="com.yhksxt.admin.model.Title" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="xindu" property="xindu" jdbcType="INTEGER" />
+    <result column="xiaodu" property="xiaodu" jdbcType="INTEGER" />
+    <result column="qufen" property="qufen" jdbcType="INTEGER" />
+    <result column="subject" property="subject" jdbcType="INTEGER" />
+    <result column="chapter" property="chapter" jdbcType="INTEGER" />
+    <result column="section" property="section" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="choose1" property="choose1" jdbcType="VARCHAR" />
+    <result column="choose2" property="choose2" jdbcType="VARCHAR" />
+    <result column="choose3" property="choose3" jdbcType="VARCHAR" />
+    <result column="choose4" property="choose4" jdbcType="VARCHAR" />
+    <result column="choose5" property="choose5" jdbcType="VARCHAR" />
+    <result column="filePath" property="filepath" jdbcType="VARCHAR" />
+    <result column="realFileName" property="realfilename" jdbcType="VARCHAR" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="mroleId" property="mroleid" jdbcType="INTEGER" />
+    <result column="m_time" property="mTime" jdbcType="VARCHAR" />
+    <result column="sroleId" property="sroleid" jdbcType="VARCHAR" />
+    <result column="s_time" property="sTime" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="sydx" property="sydx" jdbcType="VARCHAR" />
+    <result column="minute" property="minute" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="score" property="score" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, number, type, level, xindu, xiaodu, qufen, subject, chapter, section, content, 
+    choose1, choose2, choose3, choose4, choose5, filePath, realFileName, answer, mroleId, 
+    m_time, sroleId, s_time, status, sydx, minute, price, score
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yhksxt.admin.model.TitleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from title
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from title
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from title
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yhksxt.admin.model.TitleExample" >
+    delete from title
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yhksxt.admin.model.Title" >
+    insert into title (id, number, type, 
+      level, xindu, xiaodu, 
+      qufen, subject, chapter, 
+      section, content, choose1, 
+      choose2, choose3, choose4, 
+      choose5, filePath, realFileName, 
+      answer, mroleId, m_time, 
+      sroleId, s_time, status, 
+      sydx, minute, price, 
+      score)
+    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{level,jdbcType=VARCHAR}, #{xindu,jdbcType=INTEGER}, #{xiaodu,jdbcType=INTEGER}, 
+      #{qufen,jdbcType=INTEGER}, #{subject,jdbcType=INTEGER}, #{chapter,jdbcType=INTEGER}, 
+      #{section,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{choose1,jdbcType=VARCHAR}, 
+      #{choose2,jdbcType=VARCHAR}, #{choose3,jdbcType=VARCHAR}, #{choose4,jdbcType=VARCHAR}, 
+      #{choose5,jdbcType=VARCHAR}, #{filepath,jdbcType=VARCHAR}, #{realfilename,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=VARCHAR}, #{mroleid,jdbcType=INTEGER}, #{mTime,jdbcType=VARCHAR}, 
+      #{sroleid,jdbcType=VARCHAR}, #{sTime,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{sydx,jdbcType=VARCHAR}, #{minute,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, 
+      #{score,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yhksxt.admin.model.Title" >
+    insert into title
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="xindu != null" >
+        xindu,
+      </if>
+      <if test="xiaodu != null" >
+        xiaodu,
+      </if>
+      <if test="qufen != null" >
+        qufen,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="chapter != null" >
+        chapter,
+      </if>
+      <if test="section != null" >
+        section,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="choose1 != null" >
+        choose1,
+      </if>
+      <if test="choose2 != null" >
+        choose2,
+      </if>
+      <if test="choose3 != null" >
+        choose3,
+      </if>
+      <if test="choose4 != null" >
+        choose4,
+      </if>
+      <if test="choose5 != null" >
+        choose5,
+      </if>
+      <if test="filepath != null" >
+        filePath,
+      </if>
+      <if test="realfilename != null" >
+        realFileName,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="mroleid != null" >
+        mroleId,
+      </if>
+      <if test="mTime != null" >
+        m_time,
+      </if>
+      <if test="sroleid != null" >
+        sroleId,
+      </if>
+      <if test="sTime != null" >
+        s_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sydx != null" >
+        sydx,
+      </if>
+      <if test="minute != null" >
+        minute,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="xindu != null" >
+        #{xindu,jdbcType=INTEGER},
+      </if>
+      <if test="xiaodu != null" >
+        #{xiaodu,jdbcType=INTEGER},
+      </if>
+      <if test="qufen != null" >
+        #{qufen,jdbcType=INTEGER},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=INTEGER},
+      </if>
+      <if test="chapter != null" >
+        #{chapter,jdbcType=INTEGER},
+      </if>
+      <if test="section != null" >
+        #{section,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="choose1 != null" >
+        #{choose1,jdbcType=VARCHAR},
+      </if>
+      <if test="choose2 != null" >
+        #{choose2,jdbcType=VARCHAR},
+      </if>
+      <if test="choose3 != null" >
+        #{choose3,jdbcType=VARCHAR},
+      </if>
+      <if test="choose4 != null" >
+        #{choose4,jdbcType=VARCHAR},
+      </if>
+      <if test="choose5 != null" >
+        #{choose5,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="realfilename != null" >
+        #{realfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="mroleid != null" >
+        #{mroleid,jdbcType=INTEGER},
+      </if>
+      <if test="mTime != null" >
+        #{mTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sroleid != null" >
+        #{sroleid,jdbcType=VARCHAR},
+      </if>
+      <if test="sTime != null" >
+        #{sTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sydx != null" >
+        #{sydx,jdbcType=VARCHAR},
+      </if>
+      <if test="minute != null" >
+        #{minute,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yhksxt.admin.model.TitleExample" resultType="java.lang.Integer" >
+    select count(*) from title
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update title
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xindu != null" >
+        xindu = #{record.xindu,jdbcType=INTEGER},
+      </if>
+      <if test="record.xiaodu != null" >
+        xiaodu = #{record.xiaodu,jdbcType=INTEGER},
+      </if>
+      <if test="record.qufen != null" >
+        qufen = #{record.qufen,jdbcType=INTEGER},
+      </if>
+      <if test="record.subject != null" >
+        subject = #{record.subject,jdbcType=INTEGER},
+      </if>
+      <if test="record.chapter != null" >
+        chapter = #{record.chapter,jdbcType=INTEGER},
+      </if>
+      <if test="record.section != null" >
+        section = #{record.section,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choose1 != null" >
+        choose1 = #{record.choose1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choose2 != null" >
+        choose2 = #{record.choose2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choose3 != null" >
+        choose3 = #{record.choose3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choose4 != null" >
+        choose4 = #{record.choose4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.choose5 != null" >
+        choose5 = #{record.choose5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filepath != null" >
+        filePath = #{record.filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realfilename != null" >
+        realFileName = #{record.realfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mroleid != null" >
+        mroleId = #{record.mroleid,jdbcType=INTEGER},
+      </if>
+      <if test="record.mTime != null" >
+        m_time = #{record.mTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sroleid != null" >
+        sroleId = #{record.sroleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sTime != null" >
+        s_time = #{record.sTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.sydx != null" >
+        sydx = #{record.sydx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minute != null" >
+        minute = #{record.minute,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update title
+    set id = #{record.id,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=VARCHAR},
+      xindu = #{record.xindu,jdbcType=INTEGER},
+      xiaodu = #{record.xiaodu,jdbcType=INTEGER},
+      qufen = #{record.qufen,jdbcType=INTEGER},
+      subject = #{record.subject,jdbcType=INTEGER},
+      chapter = #{record.chapter,jdbcType=INTEGER},
+      section = #{record.section,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      choose1 = #{record.choose1,jdbcType=VARCHAR},
+      choose2 = #{record.choose2,jdbcType=VARCHAR},
+      choose3 = #{record.choose3,jdbcType=VARCHAR},
+      choose4 = #{record.choose4,jdbcType=VARCHAR},
+      choose5 = #{record.choose5,jdbcType=VARCHAR},
+      filePath = #{record.filepath,jdbcType=VARCHAR},
+      realFileName = #{record.realfilename,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      mroleId = #{record.mroleid,jdbcType=INTEGER},
+      m_time = #{record.mTime,jdbcType=VARCHAR},
+      sroleId = #{record.sroleid,jdbcType=VARCHAR},
+      s_time = #{record.sTime,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      sydx = #{record.sydx,jdbcType=VARCHAR},
+      minute = #{record.minute,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DOUBLE},
+      score = #{record.score,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yhksxt.admin.model.Title" >
+    update title
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="xindu != null" >
+        xindu = #{xindu,jdbcType=INTEGER},
+      </if>
+      <if test="xiaodu != null" >
+        xiaodu = #{xiaodu,jdbcType=INTEGER},
+      </if>
+      <if test="qufen != null" >
+        qufen = #{qufen,jdbcType=INTEGER},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=INTEGER},
+      </if>
+      <if test="chapter != null" >
+        chapter = #{chapter,jdbcType=INTEGER},
+      </if>
+      <if test="section != null" >
+        section = #{section,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="choose1 != null" >
+        choose1 = #{choose1,jdbcType=VARCHAR},
+      </if>
+      <if test="choose2 != null" >
+        choose2 = #{choose2,jdbcType=VARCHAR},
+      </if>
+      <if test="choose3 != null" >
+        choose3 = #{choose3,jdbcType=VARCHAR},
+      </if>
+      <if test="choose4 != null" >
+        choose4 = #{choose4,jdbcType=VARCHAR},
+      </if>
+      <if test="choose5 != null" >
+        choose5 = #{choose5,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        filePath = #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="realfilename != null" >
+        realFileName = #{realfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="mroleid != null" >
+        mroleId = #{mroleid,jdbcType=INTEGER},
+      </if>
+      <if test="mTime != null" >
+        m_time = #{mTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sroleid != null" >
+        sroleId = #{sroleid,jdbcType=VARCHAR},
+      </if>
+      <if test="sTime != null" >
+        s_time = #{sTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sydx != null" >
+        sydx = #{sydx,jdbcType=VARCHAR},
+      </if>
+      <if test="minute != null" >
+        minute = #{minute,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yhksxt.admin.model.Title" >
+    update title
+    set number = #{number,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      level = #{level,jdbcType=VARCHAR},
+      xindu = #{xindu,jdbcType=INTEGER},
+      xiaodu = #{xiaodu,jdbcType=INTEGER},
+      qufen = #{qufen,jdbcType=INTEGER},
+      subject = #{subject,jdbcType=INTEGER},
+      chapter = #{chapter,jdbcType=INTEGER},
+      section = #{section,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      choose1 = #{choose1,jdbcType=VARCHAR},
+      choose2 = #{choose2,jdbcType=VARCHAR},
+      choose3 = #{choose3,jdbcType=VARCHAR},
+      choose4 = #{choose4,jdbcType=VARCHAR},
+      choose5 = #{choose5,jdbcType=VARCHAR},
+      filePath = #{filepath,jdbcType=VARCHAR},
+      realFileName = #{realfilename,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      mroleId = #{mroleid,jdbcType=INTEGER},
+      m_time = #{mTime,jdbcType=VARCHAR},
+      sroleId = #{sroleid,jdbcType=VARCHAR},
+      s_time = #{sTime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      sydx = #{sydx,jdbcType=VARCHAR},
+      minute = #{minute,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      score = #{score,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
